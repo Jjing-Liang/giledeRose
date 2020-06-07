@@ -54,7 +54,7 @@ public class ProductWarehouseTest {
 
     @Test
     public void should_update_backstage_pass_product_info_with_downing_1_point_successfully(){
-        Product product = new NormalProduct(2L,"backstage pass product",15, 10);
+        Product product = new BackstagePassProduct(2L,"backstage pass product",15, 10);
         ProductWarehouse productWarehouse = new ProductWarehouse();
         productWarehouse.addProduct(product);
 
@@ -64,5 +64,19 @@ public class ProductWarehouseTest {
 
         assertThat(productList.get(stockId).getSellIn(), is(14));
         assertThat(productList.get(stockId).getQuality(), is(9));
+    }
+
+    @Test
+    public void should_update_backstage_pass_product_info_with_rising_1_point_successfully(){
+        Product product = new BackstagePassProduct(2L,"backstage pass product",9, 10);
+        ProductWarehouse productWarehouse = new ProductWarehouse();
+        productWarehouse.addProduct(product);
+
+        List<Product> productList = productWarehouse.getProductList();
+        int stockId = productWarehouse.getStockId(product.getId());
+        productWarehouse.updateStockInfo(stockId);
+
+        assertThat(productList.get(stockId).getSellIn(), is(8));
+        assertThat(productList.get(stockId).getQuality(), is(12));
     }
 }
