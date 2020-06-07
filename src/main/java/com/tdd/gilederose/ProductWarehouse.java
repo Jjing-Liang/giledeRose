@@ -33,8 +33,13 @@ public class ProductWarehouse {
 
     public void updateStockInfo(int stockId) {
         Product updateProduct = productList.get(stockId);
+        int qualityUpdateValue = updateProduct.getQualityUpdateRuleBySellIn(updateProduct.getSellIn());
 
-        updateProduct.setQuality(updateProduct.getQuality() + updateProduct.getQualityUpdateRuleBySellIn(updateProduct.getSellIn()));
+        if (updateProduct instanceof BackstagePassProduct && qualityUpdateValue == 0) {
+            updateProduct.setQuality(0);
+        }
+
+        updateProduct.setQuality(updateProduct.getQuality() + qualityUpdateValue);
         updateProduct.setSellIn(updateProduct.getSellIn() - 1);
     }
 }
