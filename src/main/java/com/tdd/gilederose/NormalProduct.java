@@ -7,6 +7,9 @@ public class NormalProduct extends Product {
 
     @Override
     public Integer getQualityUpdateRuleBySellIn(Integer sellIn) {
-        return null;
+        if (sellIn > 0) {
+            return -1;
+        } else
+            return -2;
     }
 }

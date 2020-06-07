@@ -7,6 +7,14 @@ public class BackstagePassProduct extends Product {
 
     @Override
     public Integer getQualityUpdateRuleBySellIn(Integer sellIn) {
-        return null;
+        if (sellIn > 10) {
+            return -1;
+        } else if (sellIn > 5) {
+            return 2;
+        } else if (sellIn > 0) {
+            return 3;
+        } else {
+            return 0;
+        }
     }
 }
