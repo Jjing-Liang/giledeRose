@@ -45,7 +45,13 @@ public abstract class Product {
     }
 
     public void setQuality(Integer quality) {
-        this.quality = quality;
+        if (quality <= 0) {
+            this.quality = 0;
+        } else if (quality >= 50) {
+            this.quality = 50;
+        } else {
+            this.quality = quality;
+        }
     }
 
     public abstract Integer getQualityUpdateRuleBySellIn(Integer sellIn);

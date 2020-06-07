@@ -33,9 +33,6 @@ public class ProductWarehouse {
 
     public void updateStockInfo(int stockId) {
         Product updateProduct = productList.get(stockId);
-        if (updateProduct.getQuality() < 0 || updateProduct.getQuality() > 50) {
-            return;
-        }
 
         updateProduct.setQuality(updateProduct.getQuality() + updateProduct.getQualityUpdateRuleBySellIn(updateProduct.getSellIn()));
         updateProduct.setSellIn(updateProduct.getSellIn() - 1);

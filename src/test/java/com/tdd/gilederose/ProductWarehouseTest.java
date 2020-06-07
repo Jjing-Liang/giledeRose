@@ -37,4 +37,18 @@ public class ProductWarehouseTest {
         assertThat(productList.get(stockId).getSellIn(), is(-2));
         assertThat(productList.get(stockId).getQuality(), is(8));
     }
+
+    @Test
+    public void should_not_update_normal_product_info_when_quality_is_0(){
+        Product product = new NormalProduct(1L,"normal product",-1, 0);
+        ProductWarehouse productWarehouse = new ProductWarehouse();
+        productWarehouse.addProduct(product);
+
+        List<Product> productList = productWarehouse.getProductList();
+        int stockId = productWarehouse.getStockId(product.getId());
+        productWarehouse.updateStockInfo(stockId);
+
+        assertThat(productList.get(stockId).getSellIn(), is(-2));
+        assertThat(productList.get(stockId).getQuality(), is(0));
+    }
 }
